@@ -1,0 +1,33 @@
+class Node:
+    def __init__(self, value):
+        self.value = value
+        self.next = None
+
+class LinkedQ:
+    def __init__(self):
+        self.__first = None
+        self.__last = None
+
+    def isEmpty(self):
+        return self.__first is None
+
+    def enqueue(self, value):
+        new_node = Node(value)
+
+        if self.isEmpty(): #fall 1
+            self.__first = new_node
+            self.__last = new_node
+
+        else: #fall 2
+            self.__last.next = new_node
+            self.__last = new_node
+
+    def dequeue(self):
+        value = self.__first.value
+        self.__first = self.__first.next
+
+        if self.isEmpty():
+            self.__last = None
+
+        return value
+
