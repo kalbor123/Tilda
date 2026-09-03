@@ -1,0 +1,15 @@
+from array import array
+
+class ArrayQ: #en kö som lagrar värden i en array
+    def __init__(self):
+        self.__items = array("i")
+
+    def enqueue(self, value):
+        self.__items.append(value) # lägger ett värde sist i kön
+
+    def dequeue(self):
+        return self.__items.pop(0) # tar bort värdet på index 0 och returnerar det
+
+    def isEmpty(self):
+        return len(self.__items) == 0 # returnerar true om antalet värden är 0
+
