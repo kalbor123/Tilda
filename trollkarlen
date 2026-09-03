@@ -1,0 +1,18 @@
+from linkedQFile import LinkedQ
+
+input_row = input("Vilken ordning ligger korten i? ")  # läser in inmatning
+
+cards = input_row.split() # delar upp inmatad data i lista
+
+q = LinkedQ()                # skapar tom kö
+
+for card in cards:          #går ignm korten i inmatad ordning
+    q.enqueue(card)         #lägger varje kort sist i kön
+
+print("De kommer ut i denna ordning:", end=" ")
+
+while not q.isEmpty():
+    moved_card = q.dequeue() #tar ut första kortet
+    q.enqueue(moved_card) # lägger det som var första kortet sist
+    shown_card = q.dequeue() # tar bort det nya första kortet från kön
+    print(shown_card, end=" ") #printar det borttagna kortet
