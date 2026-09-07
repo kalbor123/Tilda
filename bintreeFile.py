@@ -1,54 +1,54 @@
-class Node:
-    
-    def __init__(self, value):
-        self.value = value
-        self.left = None
-        self.right = None
+class Node: #klass som beskriver nod i trädet
 
-class Bintree: 
+    def __init__(self, value): #Anropas när ny nod skapas
+        self.value = value # sparar värdet i noden
+        self.left = None # pekare åt vänster
+        self.right = None # pekare åt höger
 
-    def __init__(self):
-        self.root = None
+class Bintree: # representerar binärt sökträd
 
-    def put(self, newvalue): 
-        if self.root is None:
-            self.root = Node(newvalue)
-        else:
-            putta(self.root, newvalue) 
-    
-    def __contains__(self, value):
-         return find(self.root, value)
-    
-    def write(self):
-        write(self.root)
-        print()
+    def __init__(self): #ger nytt träd startvärde
+        self.root = None # hänvisar till roten
+
+    def put(self, newvalue): # Sorterar in newvalue i trädet
+        self.root = putta(self.root, newvalue) # sparar roten som returneras av putta
+
+    def __contains__(self, value): #används för att söka i trädet
+        return finns(self.root, value) # returnerar true om värdet finns
+
+    def write(self): #skriver ut trädet värden inorder
+        skriv(self.root) #anropar skriv
+        print("\n")
+
 
 def putta(node, newvalue):
-    if newvalue < node.value: 
-        if node.left is None: 
-            node.left = Node(newvalue)
-        else:
-            putta(node.left, newvalue)
+    if node is None:
+        return Node(newvalue) #skapar ny nod med newvalue
 
-    elif newvalue > node.value:
-        if node.right is None:
-            node.right = Node(newvalue)
-        else:
-            putta(node.right, newvalue)
+    if newvalue < node.value: #mindre värde till vänster
+        node.left = putta(node.left, newvalue) #läger in och sparar referens som returneras
 
-def find(node, value): 
+    elif newvalue > node.value: # större värden till höger
+        node.right = putta(node.right, newvalue) #lägger in där och sparar referensen som returnears
+
+    return node #returenrar roten till funktionen
+
+
+def finns(node, value): #söker ett värde, börjar vid node
     if node is None:
         return False
     if value == node.value:
         return True
-    
-    if value < node.value:
-        return find(node.left, value)
-    else:
-        return find(node.right, value)
 
-def write(node):
+    if value < node.value:
+        return finns(node.left, value)
+    else:
+        return finns(node.right, value)
+
+
+def skriv(node): #skriver ut värden i delträdet som börjar vid node
     if node is not None:
-        write(node.left)
+        skriv(node.left)
         print(node.value, end=" ")
-        write(node.right)
+        skriv(node.right) # de indragna raderna gör inorder-regeln.
+
