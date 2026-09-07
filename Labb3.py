@@ -1,17 +1,16 @@
 from bintreeFile import Bintree
 
-swedish = Bintree()
+svenska = Bintree()
 english = Bintree()
 
-with open("word3.txt", "r", encoding="utf-8") as swedishfil:
-    for rad in swedishfil:
-        word = rad.strip()
-
-        if word in swedish:
-            print(word, end=" ")
+with open("word3.txt", "r", encoding = "utf-8") as svenskfil:
+    for rad in svenskfil:
+        ordet = rad.strip()                # Ett trebokstavsord per rad
+        if ordet in svenska:      #anropar __contains__ automatiskt
+            print(ordet, end = " ")
         else:
-            swedish.put(word)
-print()
+            svenska.put(ordet)             # in i sökträdet
+print("\n")
 
 with open("engelska.txt", "r", encoding="utf-8") as englishfile:
     for rad in englishfile:
@@ -21,5 +20,5 @@ with open("engelska.txt", "r", encoding="utf-8") as englishfile:
              if word not in english:
                  english.put(word)
 
-                 if word in swedish: 
+                 if word in svenska:
                     print(word,  end=" ")
