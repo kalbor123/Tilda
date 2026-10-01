@@ -55,7 +55,7 @@ class Hashtable:
 
         for tecken in key: #går igenom namnet, ett tecken/bokstav i taget
             teckenkod = ord(tecken) #hämtar heltalskoden för tecknet/bokstaven
-            hashvärde = hashvärde * 31 + teckenkod #bygger vidare värdet
+            hashvärde = hashvärde * 17 + teckenkod #bygger vidare värdet
 
         return hashvärde % self.size #ger ett tal från 0 till (self.size - 1),
         # ger index där nyckeln ska ligga

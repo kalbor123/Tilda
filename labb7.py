@@ -68,12 +68,20 @@ def read_lista(filnamn):
 def main():
     lista = read_lista('kdrama.csv')
 
-    tabell = Hashtable(541)
+    tabell = Hashtable(280)
 
     for drama in lista:
         tabell.store(drama.Drama_Name, drama) #lagrar dramat med namnet som nyckel
 
     namn = input("Vilket drama söker du efter: ")  # Väljer första dramats namn att testa med.
+
+    max_längd = 0  # Sparar den längsta listlängd, från början 0
+
+    for krocklista in tabell.table:  # Går igenom tabellens platser
+        if len(krocklista) > max_längd:  # Kontrollerar om denna lista är längre
+            max_längd = len(krocklista)  # Sparar den nya största längden
+
+    print("Längsta krocklistan:", max_längd)  # Visar hur många noder som som mest delar plats.
 
     if namn in tabell:  # Använder  __contains__ för att kontrollera om nyckeln finns
         hittat_drama = tabell[namn]  # Använder  __getitem__ för att hämta Drama-objekte
