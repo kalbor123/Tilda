@@ -1,0 +1,38 @@
+class Node:                     # En nod som lagrar värde
+    def __init__(self, value):  # kör när en ny nod skapas
+        self.value = value      #sparar värdet
+        self.next = None        # för att kunna lägga till fler noder
+
+class LinkedQ:                  # kö som består av länkade noder
+    def __init__(self):         #kör när vi skapar nytt köobjekt
+        self.__first = None
+        self.__last = None
+
+    def isEmpty(self): # kontrollerar om tom kö
+        return self.__first is None
+
+    def enqueue(self, value):   # lägger ett nytt värde sist i kön
+        new_node = Node(value)  # skapar ny nod med värdet
+
+        if self.isEmpty(): #fall 1, ett värde är både första och sista
+            self.__first = new_node # ny nod blir första värde
+            self.__last = new_node # ny nod blir också sista värde ^
+
+        else: #fall 2
+            self.__last.next = new_node # kopplar föregående sista nod till nya noden
+            self.__last = new_node # gör ny nod till sista
+
+    def dequeue(self):  # tar ut första värdet
+        value = self.__first.value # sparar värdet innan går vidare till nästa nod
+        self.__first = self.__first.next #nästa nod blir first
+
+        if self.isEmpty():          #om kön är tom:
+            self.__last = None      #släpp sista noden
+
+        return value #returnerar det uttagna värdet
+
+    def peek(self): # tittar på första värdet utan att ändra ngt
+        if self.isEmpty(): #kontrollerar om kön saknar noder
+            return None
+
+        return self.__first.value #returnerar värdet i första noden
